@@ -88,7 +88,7 @@ class _CreateState extends State<VerifyTraveler> {
                     //
                     // Do funny stuff here
                     //
-                    verifyPassportUK(_lastName, _firstName);
+                    verifyUKTraveler(_lastName, _firstName);
 
                     message = 'Query created successfully';
                   } catch (e) {
@@ -109,7 +109,7 @@ class _CreateState extends State<VerifyTraveler> {
                     borderRadius: BorderRadius.circular(6.0),
                   ),
                 ),
-                child: const Text('Create'),
+                child: const Text('Verify'),
               ),
             ],
           ),
