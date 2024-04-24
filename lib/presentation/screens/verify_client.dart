@@ -38,9 +38,9 @@ Future<String> getQueryQRCode(String context, String type, Map<String, Map<Strin
 }
 Future<String> verifyUKTraveler(String lastName, String firstName) async{
   return getQueryQRCode(
-    "ipfs://QmSbdydtWpFvg8nDVhzYnASdpkncri6SQxfBzye6qhDJt8",
+    "ipfs://QmbsEWM7nGU9p3vLkB3G8mp99WESVa25nRHS3Exq8WfBh3",
     "PassportUK", {
-    "Lastname": {"\$eq": lastName},
-    "Firstname": {"\$eq": firstName}
+      "Lastname": {"\$eq": lastName},
+      "Firstname": {"\$eq": firstName}
     });
 }
