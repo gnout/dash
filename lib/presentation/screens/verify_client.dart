@@ -2,22 +2,26 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-Future<String> getQueryQRCode(String context, String type, Map<String, Map<String, String>> credentialSubject) async {
+Future<String> getQueryQRCode(String context, String type, List<Map<String, Map<String, String>>> credentialSubjects) async {
   var url = Uri.parse('https://verifier-backend.polygonid.me/sign-in');
   var payload = {
     "chainID": "80002",
     "skipClaimRevocationCheck": false,
-    "scope": [{
-      "circuitId": "credentialAtomicQuerySigV2",
-      "id": 1713961493,
-      "query": {
-        "allowedIssuers": ["*"],
-        "context": context,
-        "type": type,
-        "credentialSubject": credentialSubject
-      }
-    }]
+    "scope": List.generate(credentialSubjects.length, (index) {
+      return {
+        "circuitID": "credentialAtomicQueryV3-beta.1",
+        "id": index + 1, // Assuming id starts at 1 and increments for each credential subject
+        "query": {
+          "context": context,
+          "allowedIssuers": ["*"],
+          "type": type,
+          "credentialSubject": credentialSubjects[index]
+        }
+      };
+    })
   };
+  print(payload);
+
 
   var response = await http.post(
     url,
@@ -29,6 +33,7 @@ Future<String> getQueryQRCode(String context, String type, Map<String, Map<Strin
     print('API call successful.');
     var data = json.decode(response.body);
     String qrCode = data['qrCode'];
+    print(data['sessionID']);
     print('QR Code: $qrCode');
     return qrCode;
   } else {
@@ -41,17 +46,17 @@ Future<String> verifyUKTraveler(String lastName, String firstName) async{
   return getQueryQRCode(
     "ipfs://QmbsEWM7nGU9p3vLkB3G8mp99WESVa25nRHS3Exq8WfBh3",
     "PassportUK", 
-    {
-      "Lastname": {"\$eq": lastName},
-      "Firstname": {"\$eq": firstName}
-    });
+    [
+      { "Lastname": {"\$eq": lastName}},
+      {"Firstname": {"\$eq": firstName}}
+    ]);
 }
-Future<String> verifyDriversLicense(String lastName, DateTime brithDate) async{
+Future<String> verifyDriversLicense(String lastName, DateTime birthDate) async{
   return getQueryQRCode(
     "ipfs://QmbsEWM7nGU9p3vLkB3G8mp99WESVa25nRHS3Exq8WfBh3",
     "PassportUK",  
-    {
-      "Lastname": {"\$eq": lastName},
-      "DateOfBirth": {"\$le": DateFormat('yyyy-MM-dd').format(brithDate)}
-    });
+    [
+      { "Lastname": {"\$eq": lastName}},
+      {"DateOfBirth": {"\$lt": DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(birthDate)}}
+    ]);
 }

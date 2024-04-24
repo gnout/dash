@@ -36,7 +36,7 @@ class APIService {
       "credentialSchema": "ipfs://QmcsKmvYMnCb27Eu3T6aGNkmNxA5CmeZX7iQkvZ2B5V4WD",
       "type": "PassportUK",
       "credentialSubject": {
-        "id": "did:polygonid:polygon:amoy:2qYkoXJ9AXjr8jjH6C9zdUjPAyzAQdhxTp3a6AnUKv",
+        "id": "did:polygonid:polygon:amoy:2qW4hiyyiXcVCHTe82ktcfpD6jNyp7tMKDyrTr5W4T",
         "Lastname": passport.lastName,
         "Firstname": passport.firstName,
         "Nationality": passport.nationality,
