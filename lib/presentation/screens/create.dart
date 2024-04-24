@@ -1,3 +1,5 @@
+import 'package:dash/presentation/models/passport.dart';
+import 'package:dash/services/service_api.dart';
 import 'package:flutter/material.dart';
 
 class Create extends StatefulWidget {
@@ -136,11 +138,26 @@ class _CreateState extends State<Create> {
                   String message = '';
 
                   try {
-                    //
-                    // Do funny stuff here
-                    //
+                    APIService service = APIService();
 
-                    String link = 'iden3comm://?request_uri=https://verifier-backend.polygonid.me/qr-store?id=73e013b3-e47b-4ccc-bf19-aaf69df06269';
+                    String id = await service.fetchData(passport: Passport(
+                      firstName: _firstName,
+                      lastName: _lastName,
+                      nationality: _nationality,
+                      dateOfBirth: _dateOfBirth,
+                    ));
+
+                    if (id.isEmpty) {
+                      throw Exception('Creating Credential Failed');
+                    }
+
+                    String link = await service.getCredentialDetails(id);
+
+                    if (link.isEmpty) {
+                      throw Exception('Creating Credential Link Failed');
+                    }
+
+                    //String link = 'iden3comm://?request_uri=https://verifier-backend.polygonid.me/qr-store?id=73e013b3-e47b-4ccc-bf19-aaf69df06269';
 
                     await Navigator.pushNamed(context, '/create/qrcode', arguments: link);
 

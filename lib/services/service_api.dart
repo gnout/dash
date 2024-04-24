@@ -1,3 +1,4 @@
+import 'package:dash/presentation/models/passport.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -24,10 +25,7 @@ class APIService {
     _responseBody = value;
   }
 
-
-
-
-  Future<String> fetchData() async {
+  Future<String> fetchData({required Passport passport}) async {
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
     var url = Uri.parse('$baseURL/v1/credentials');
     var headers = <String, String>{
@@ -57,9 +55,6 @@ class APIService {
     }
   }
 
-
-
-
   Future<String> getCredentialDetails(String credentialId) async {
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
     var url = Uri.parse('$baseURL/v1/credentials/$credentialId/qrcode?type=link');
@@ -76,6 +71,4 @@ class APIService {
       return ''; // Return empty string if response is not successful
     }
   }
-
-
 }
