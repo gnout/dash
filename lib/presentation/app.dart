@@ -20,6 +20,7 @@ class DashApp extends StatelessWidget {
         '/create': (context) => const Create(),
         '/create/qrcode': (context) => const QrCode(),
         '/verify_traveler': (context) => const VerifyTraveler(),
+        '/verify_traveler/qrcode': (context) => const QrCode(),
       },
     );
   }
