@@ -17,15 +17,27 @@ class Home extends StatelessWidget {
           children: const [
             MenuTile(
               icon: Icons.create,
+              title: 'Connect Wallet',
+              subTitle: 'Connect Wallet',
+              route: '/connect_wallet',
+            ),
+            MenuTile(
+              icon: Icons.create,
               title: 'Create',
               subTitle: 'Create Passport Credential',
               route: '/create',
             ),
             MenuTile(
               icon: Icons.verified_outlined,
-              title: 'Verify',
+              title: 'Verify Traveller',
               subTitle: 'Verify Traveler',
               route: '/verify_traveler',
+            ),
+            MenuTile(
+              icon: Icons.car_rental,
+              title: 'Verify Driver',
+              subTitle: 'Verify Drivers License',
+              route: '/verify_driver',
             ),
           ],
         ),
