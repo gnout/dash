@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 Future<String> getQueryQRCode(String context, String type, Map<String, Map<String, String>> credentialSubject) async {
   var url = Uri.parse('https://verifier-backend.polygonid.me/sign-in');
@@ -39,8 +40,18 @@ Future<String> getQueryQRCode(String context, String type, Map<String, Map<Strin
 Future<String> verifyUKTraveler(String lastName, String firstName) async{
   return getQueryQRCode(
     "ipfs://QmbsEWM7nGU9p3vLkB3G8mp99WESVa25nRHS3Exq8WfBh3",
-    "PassportUK", {
+    "PassportUK", 
+    {
       "Lastname": {"\$eq": lastName},
       "Firstname": {"\$eq": firstName}
+    });
+}
+Future<String> verifyDriversLicense(String lastName, DateTime brithDate) async{
+  return getQueryQRCode(
+    "ipfs://QmbsEWM7nGU9p3vLkB3G8mp99WESVa25nRHS3Exq8WfBh3",
+    "PassportUK",  
+    {
+      "Lastname": {"\$eq": lastName},
+      "DateOfBrith": {"\$le": DateFormat('yyyy-MM-dd').format(brithDate)}
     });
 }
