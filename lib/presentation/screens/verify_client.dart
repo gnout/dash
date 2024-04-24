@@ -52,6 +52,6 @@ Future<String> verifyDriversLicense(String lastName, DateTime brithDate) async{
     "PassportUK",  
     {
       "Lastname": {"\$eq": lastName},
-      "DateOfBrith": {"\$le": DateFormat('yyyy-MM-dd').format(brithDate)}
+      "DateOfBirth": {"\$le": DateFormat('yyyy-MM-dd').format(brithDate)}
     });
 }
