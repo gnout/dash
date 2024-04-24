@@ -2,6 +2,8 @@ import 'package:dash/presentation/models/passport.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../presentation/models/ConnectionQRCode.dart';
+
 class APIService {
   final String baseURL = "https://issuer-admin.polygonid.me";
   final String username = 'user-api';
@@ -72,4 +74,36 @@ class APIService {
       return ''; // Return empty string if response is not successful
     }
   }
+
+  // New functionality to fetch QR code link for authentication
+  Future<ConnectionQRCode> fetchQRCodeLink() async {
+    var url = Uri.parse('$baseURL/v1/authentication/qrcode?type=link');
+    var response = await http.get(url, headers: {'accept': 'application/json'});
+
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body);
+
+      return ConnectionQRCode(
+        qrCodeLink: responseData['qrCodeLink'],
+        sessionID: responseData['sessionID'],
+      );
+
+    } else {
+      throw Exception('Failed to fetch QR code');
+    }
+  }
+
+  // New functionality to fetch issuer ID from an authentication session
+  Future<String> fetchIssuerId(String sessionId) async {
+    var url = Uri.parse('$baseURL/v1/authentication/sessions/$sessionId');
+    var response = await http.get(url, headers: {'accept': 'application/json'});
+
+    if (response.statusCode == 200) {
+      var responseData = jsonDecode(response.body);
+      return responseData['connection']['issuerID']; // Assuming 'issuerID' is stored in 'connection' key
+    } else {
+      throw Exception('Failed to fetch issuer ID');
+    }
+  }
 }
+
