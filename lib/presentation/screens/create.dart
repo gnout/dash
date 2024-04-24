@@ -140,6 +140,10 @@ class _CreateState extends State<Create> {
                     // Do funny stuff here
                     //
 
+                    String link = 'iden3comm://?request_uri=https://verifier-backend.polygonid.me/qr-store?id=73e013b3-e47b-4ccc-bf19-aaf69df06269';
+
+                    await Navigator.pushNamed(context, '/create/qrcode', arguments: link);
+
                     message = 'Credential created successfully';
                   } catch (e) {
                     message = '$e';
