@@ -33,25 +33,26 @@ class APIService {
       'Content-Type': 'application/json',
     };
     var body = jsonEncode({
-      "credentialSchema": "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json/KYCAgeCredential-v3.json",
-      "type": "KYCAgeCredential",
+      "credentialSchema": "ipfs://QmcsKmvYMnCb27Eu3T6aGNkmNxA5CmeZX7iQkvZ2B5V4WD",
+      "type": "PassportUK",
       "credentialSubject": {
         "id": "did:polygonid:polygon:amoy:2qYkoXJ9AXjr8jjH6C9zdUjPAyzAQdhxTp3a6AnUKv",
-        "birthday": 19960424,
-        "documentType": 2
+        "Lastname": passport.lastName,
+        "Firstname": passport.firstName,
+        "Nationality": passport.nationality,
+        "DateOfBirth": passport.dateOfBirth
       },
-      "expiration": "2025-04-24T09:40:04.101Z",
       "signatureProof": true,
-      "mtProof": false,
+      "mtProof": false
     });
     var response = await http.post(url, headers: headers, body: body);
     statusCode = response.statusCode;
 
     if (response.statusCode == 201) {
       var responseData = jsonDecode(response.body);
-      return getCredentialDetails(responseData['id']); // Return the Future returned by getCredentialDetails
+      return await getCredentialDetails(responseData['id']); // Return the Future returned by getCredentialDetails
     } else {
-      throw Exception('Failed to fetch data');
+      return '';
     }
   }
 
@@ -64,9 +65,9 @@ class APIService {
     };
     var response = await http.get(url, headers: headers);
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body);
-      return responseData['link']; // Assuming the link is stored in a key named 'link'
+      return responseData['qrCodeLink']; // Assuming the link is stored in a key named 'link'
     } else {
       return ''; // Return empty string if response is not successful
     }
