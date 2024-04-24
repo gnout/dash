@@ -3,12 +3,11 @@ import 'package:http/http.dart' as http;
 
 class PollingClass {
   Timer? _timer;
-  final String _apiEndpoint = 'your_api_endpoint';
+  final String _apiEndpoint;
   final void Function(http.Response) _onSuccess;
   final void Function() _onTimeout;
-  final void Function() _onCancel;
 
-  PollingClass(this._onSuccess, this._onTimeout, this._onCancel);
+  PollingClass(this._apiEndpoint, this._onSuccess, this._onTimeout);
 
   void startPolling() {
     _timer = Timer.periodic(const Duration(seconds: 5), (timer) async {
@@ -19,6 +18,15 @@ class PollingClass {
           stopPolling();
         }
       } catch (error) {
+        print(error);
+      }
+    });
+
+    // Automatic timeout after 30 seconds
+    Future.delayed(const Duration(seconds: 30), () {
+      if (_timer?.isActive ?? false) {
+        stopPolling();
+        _onTimeout();
       }
     });
   }
