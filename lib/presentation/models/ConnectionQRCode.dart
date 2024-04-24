@@ -5,6 +5,5 @@ class ConnectionQRCode {
   ConnectionQRCode({
     this.qrCodeLink,
     this.sessionID,
-
   });
 }

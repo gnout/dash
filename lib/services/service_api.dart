@@ -1,4 +1,5 @@
 import 'package:dash/presentation/models/passport.dart';
+import 'package:dash/services/session.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -38,7 +39,7 @@ class APIService {
       "credentialSchema": "ipfs://QmcsKmvYMnCb27Eu3T6aGNkmNxA5CmeZX7iQkvZ2B5V4WD",
       "type": "PassportUK",
       "credentialSubject": {
-        "id": "did:polygonid:polygon:amoy:2qYkoXJ9AXjr8jjH6C9zdUjPAyzAQdhxTp3a6AnUKv",
+        "id": Session.userId,
         "Lastname": passport.lastName,
         "Firstname": passport.firstName,
         "Nationality": passport.nationality,
@@ -95,14 +96,20 @@ class APIService {
 
   // New functionality to fetch issuer ID from an authentication session
   Future<String> fetchIssuerId(String sessionId) async {
+    String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    var headers = <String, String>{
+      'authorization': basicAuth,
+      'Content-Type': 'application/json',
+    };
+
     var url = Uri.parse('$baseURL/v1/authentication/sessions/$sessionId');
-    var response = await http.get(url, headers: {'accept': 'application/json'});
+    var response = await http.get(url, headers: headers);
 
     if (response.statusCode == 200) {
       var responseData = jsonDecode(response.body);
-      return responseData['connection']['issuerID']; // Assuming 'issuerID' is stored in 'connection' key
+      return responseData['connection']['userID']; // Assuming 'issuerID' is stored in 'connection' key
     } else {
-      throw Exception('Failed to fetch issuer ID');
+      return '';
     }
   }
 }

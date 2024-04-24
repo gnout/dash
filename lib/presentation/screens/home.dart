@@ -20,6 +20,7 @@ class Home extends StatelessWidget {
               title: 'Connect Wallet',
               subTitle: 'Connect Wallet',
               route: '/connect_wallet',
+              checkUserId: false,
             ),
             MenuTile(
               icon: Icons.create,
