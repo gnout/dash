@@ -1,6 +1,7 @@
 import 'package:dash/presentation/models/passport.dart';
 import 'package:dash/services/session.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'dart:convert';
 
 import '../presentation/models/ConnectionQRCode.dart';
@@ -29,6 +30,12 @@ class APIService {
   }
 
   Future<String> fetchData({required Passport passport}) async {
+
+    String dateOfBirth = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(
+        DateTime.parse(passport.dateOfBirth!)
+    );
+
+
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
     var url = Uri.parse('$baseURL/v1/credentials');
     var headers = <String, String>{
@@ -43,7 +50,7 @@ class APIService {
         "Lastname": passport.lastName,
         "Firstname": passport.firstName,
         "Nationality": passport.nationality,
-        "DateOfBirth": passport.dateOfBirth
+        "DateOfBirth": dateOfBirth
       },
       "signatureProof": true,
       "mtProof": false
