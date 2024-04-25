@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
         child: ListView(
           children: const [
             MenuTile(
-              icon: Icons.create,
+              icon: Icons.wallet,
               title: 'Connect Wallet',
               subTitle: 'Connect Wallet',
               route: '/connect_wallet',
@@ -33,12 +33,14 @@ class Home extends StatelessWidget {
               title: 'Verify Traveller',
               subTitle: 'Verify Traveler',
               route: '/verify_traveler',
+              checkUserId: false,
             ),
             MenuTile(
               icon: Icons.car_rental,
               title: 'Verify Driver',
               subTitle: 'Verify Drivers License',
               route: '/verify_driver',
+              checkUserId: false,
             ),
           ],
         ),
