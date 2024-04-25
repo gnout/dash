@@ -17,8 +17,6 @@ class DashApp extends StatelessWidget {
       title: 'Berlin Hackathon',
       theme: const SummerTheme().toThemeData(),
       initialRoute: '/',
-
-
       routes: {
         '/': (context) => const Home(),
         '/home': (context) => const Home(),

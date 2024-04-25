@@ -6,8 +6,7 @@ import 'dart:convert';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class QrCode2 extends StatefulWidget {
-  // final Map<String, String> data;
-  const QrCode2({super.key}/*, required this.data}*/);
+  const QrCode2({super.key});
   
   @override
   _QrCodeState createState() => _QrCodeState();
@@ -15,7 +14,13 @@ class QrCode2 extends StatefulWidget {
 
 class _QrCodeState extends State<QrCode2> {
   Timer? _timer;
-  String _status = 'pending';
+  final double iconSize = 40.0;
+
+  Icon _status = const Icon(
+    Icons.pending,
+    color: Colors.grey,
+    size: 40.0,
+  );
 
   @override
   void initState() {
@@ -25,7 +30,7 @@ class _QrCodeState extends State<QrCode2> {
 
   void _startPolling() {
     int attempts = 0;
-    const maxAttempts = 15;
+    const maxAttempts = 30;
 
     const duration = Duration(seconds: 2);  // Poll every 5 seconds
     _timer = Timer.periodic(duration, (Timer t) async {
@@ -38,7 +43,11 @@ class _QrCodeState extends State<QrCode2> {
       if (attempts > maxAttempts) {
         _timer?.cancel();
         setState(() {
-          _status = 'failed';
+          _status = Icon(
+            Icons.cancel,
+            color: Colors.red,
+            size: iconSize,
+          );
         });
       }
     });
@@ -50,7 +59,11 @@ class _QrCodeState extends State<QrCode2> {
     if (data['status'] == 'success') {
       _timer?.cancel();
       setState(() {
-        _status = 'approved';
+        _status = Icon(
+          Icons.check,
+          color: Colors.green,
+          size: iconSize,
+        );
       });
     }
   }
@@ -67,7 +80,6 @@ class _QrCodeState extends State<QrCode2> {
     print(Session.connection.sessionID);
     print(_status);
 
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Scan QR Code'),
@@ -76,7 +88,6 @@ class _QrCodeState extends State<QrCode2> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            // Assuming QrImageView is similar to QrImage, replace this with your actual QrImageView widget if different
             QrImageView(
               data: Session.connection.qrCodeLink!,
               size: 280,
@@ -85,10 +96,10 @@ class _QrCodeState extends State<QrCode2> {
                   100,
                   100,
                 )
-              ),  // Assuming this is a valid property
+              ),
             ),
-            SizedBox(height: 20),
-            Text('Status: $_status'),
+            const SizedBox(height: 20),
+            _status
           ],
         ),
       ),
