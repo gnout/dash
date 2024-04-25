@@ -1,7 +1,5 @@
 # Decode Travel - PIP Polygon ID Passport 
 
-Welcome to Dash, a new Flutter project designed to kickstart your mobile application development with Flutter.
-
 ##  Project Overview
 
 Purpose: "Decode Travel - PIP Polygon ID Passport" aims to streamline car rental processes using a blockchain-enabled access and loyalty system, leveraging the capabilities of Polygon ID to provide secure digital identity verification.
