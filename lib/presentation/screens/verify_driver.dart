@@ -74,6 +74,7 @@ class _CreateState extends State<VerifyDriver> {
 
                   try {
                     await verifyDriversLicense(_lastName, _dateOfBrith);
+
                     await Navigator.pushNamed(context, '/verify_driver/qrcode2');
                   } catch (e) {
                     message = '$e';
