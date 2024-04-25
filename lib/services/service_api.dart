@@ -30,10 +30,6 @@ class APIService {
     _responseBody = value;
   }
 
-
-
-
-
   Future<String> setPreferencesData({required PreferencesDao preferences}) async {
     String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
     var url = Uri.parse('$baseURL/v1/credentials');
@@ -63,10 +59,6 @@ class APIService {
       return '';
     }
   }
-
-
-
-
 
   Future<String> fetchData({required Passport passport}) async {
 
