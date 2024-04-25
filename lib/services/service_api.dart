@@ -32,7 +32,7 @@ class APIService {
   Future<String> fetchData({required Passport passport}) async {
 
     String dateOfBirth = DateFormat("yyyy-MM-dd").format(
-        DateTime.parse(passport.dateOfBirth!)
+        DateTime.parse(passport.dateOfBirth!) 
     );
 
 

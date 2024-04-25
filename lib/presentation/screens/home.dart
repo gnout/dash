@@ -40,6 +40,12 @@ class Home extends StatelessWidget {
               subTitle: 'Verify Drivers License',
               route: '/verify_driver',
             ),
+            MenuTile(
+              icon: Icons.car_rental,
+              title: 'Request Preferences',
+              subTitle: 'Request Preferences',
+              route: '/requestPreferences',
+            )
           ],
         ),
       ),

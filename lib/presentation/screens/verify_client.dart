@@ -74,3 +74,25 @@ Future verifyDriversLicense(String lastName, DateTime birthDate) async{
       {"DateOfBirth": {"\$lt": DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(birthDate)}}
     ]);
 }
+
+class MyPreferences {
+  final String? foods;
+  final String? hobbies;
+  final String? cities;
+
+  MyPreferences({
+    this.hobbies,
+    this.foods,
+    this.cities
+  });
+}
+Future getMyPreferences() async {
+  return getQueryQRCode(
+    "ipfs://QmPn7RM4gL7LK7njzaSEkksxjsDMfH48VTr4GcT8W6R57u",
+    "MyPreferences", 
+      [{"Foods": {}},
+      {"Hobbies":{}},
+      {"Cities":{}}]
+    );
+
+}
