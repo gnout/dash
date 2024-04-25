@@ -2,16 +2,20 @@
 
 Welcome to Dash, a new Flutter project designed to kickstart your mobile application development with Flutter.
 
-## Getting Started
+##  Project Overview
 
-This repository serves as a starting point for anyone interested in building a Flutter application. Whether you are new to Flutter or looking for advanced features, the following resources will guide you through your Flutter development journey:
+Purpose: "Decode Travel - PIP Polygon ID Passport" aims to streamline car rental processes using a blockchain-enabled access and loyalty system, leveraging the capabilities of Polygon ID to provide secure digital identity verification.
+Functionality: Key features include digital key distribution for car access, a system for sharing temporary digital keys, and a loyalty points system managed through blockchain technology to enhance customer engagement and security.
 
-### Essential Flutter Resources
-- **First Flutter App**: Follow the [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab) tutorial to create a simple Flutter application from scratch.
-- **Flutter Cookbook**: Access a variety of [useful Flutter samples](https://docs.flutter.dev/cookbook) that demonstrate how to solve common problems with Flutter.
+##   Technical Overview of Codebase
 
-### Additional Help
-For more comprehensive assistance with Flutter development, refer to the [Flutter online documentation](https://docs.flutter.dev/). This resource provides detailed tutorials, samples, guidance on mobile development, and a full API reference.
+Languages and Frameworks: The project uses Flutter for both front-end and potential cross-platform needs, providing a unified development approach.
+API Integration: This includes connections with various service providers:
+IT Kompass: For ticketing solutions.
+Avra and others: For additional functionalities not specified yet.
+Polygon ID API: For integrating blockchain-based identity verification.
+Dependencies: Outline the major libraries used in the Flutter environment, such as HTTP for network requests and provider for state management.
+
 
 ## System Links
 
