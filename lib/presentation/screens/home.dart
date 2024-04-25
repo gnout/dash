@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
             MenuTile(
               icon: Icons.verified_outlined,
               title: 'Verify Traveller',
-              subTitle: 'Verify Traveler',
+              subTitle: 'Verify Traveller',
               route: '/verify_traveler',
               checkUserId: false,
             ),
@@ -44,15 +44,15 @@ class Home extends StatelessWidget {
             ),
             MenuTile(
               icon: Icons.room_preferences,
-              title: 'Preferences',
+              title: 'Add Preferences',
               subTitle: 'Food, allergies etc.',
               route: '/preferences',
-              checkUserId: false,
+              checkUserId: true,
             ),
             MenuTile(
-              icon: Icons.car_rental,
+              icon: Icons.room_preferences_outlined,
               title: 'Request Preferences',
-              subTitle: 'Request Preferences',
+              subTitle: 'I like ...',
               route: '/requestPreferences',
               checkUserId: false,
             )

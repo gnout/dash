@@ -17,7 +17,7 @@ class _CreateState extends State<VerifyTraveler> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Verify Traveler'),
+        title: const Text('Verify Traveller'),
       ),
       body: Form(
         key: _formKey,
