@@ -55,7 +55,9 @@ class _CreateState extends State<VerifyDriver> {
                 initialDate:DateTime.now().subtract(const Duration(days: 365*18)),
                 firstDate: DateTime.now().subtract(const Duration(days: 365*100)), 
                 lastDate: DateTime.now().subtract(const Duration(days: 365*18)),
-                onDateSubmitted: (value) => _dateOfBrith = value,
+                onDateSubmitted: (value) =>{
+                  _dateOfBrith = value
+                },
               ),
               const SizedBox(
                 height: 32.0,
@@ -71,9 +73,9 @@ class _CreateState extends State<VerifyDriver> {
                   String message = '';
 
                   try {
-                    String link = await verifyDriversLicense(_lastName, _dateOfBrith);
+                    var data = await verifyDriversLicense(_lastName, _dateOfBrith);
 
-                    await Navigator.pushNamed(context, '/verify_driver/qrcode', arguments: link);
+                    await Navigator.pushNamed(context, '/verify_driver/qrcode', arguments: data['link']);
                   } catch (e) {
                     message = '$e';
                   }

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
-Future<String> getQueryQRCode(String context, String type, List<Map<String, Map<String, String>>> credentialSubjects) async {
+Future<Map<String, String>> getQueryQRCode(String context, String type, List<Map<String, Map<String, String>>> credentialSubjects) async {
   var url = Uri.parse('https://verifier-backend.polygonid.me/sign-in');
   var payload = {
     "chainID": "80002",
@@ -35,14 +35,17 @@ Future<String> getQueryQRCode(String context, String type, List<Map<String, Map<
     String qrCode = data['qrCode'];
     print(data['sessionID']);
     print('QR Code: $qrCode');
-    return qrCode;
+    return Map<String, String>.of({
+      "link": qrCode,
+      "sessionID": data['sessionID']
+    });
   } else {
     print('Failed to call API. Status code: ${response.statusCode}');
     print('Response body: ${response.body}');
     throw Exception('Failed to load qrCode');
   }
 }
-Future<String> verifyUKTraveler(String lastName, String firstName) async{
+Future<Map<String, String>> verifyUKTraveler(String lastName, String firstName) async{
   return getQueryQRCode(
     "ipfs://QmbsEWM7nGU9p3vLkB3G8mp99WESVa25nRHS3Exq8WfBh3",
     "PassportUK", 
@@ -51,7 +54,7 @@ Future<String> verifyUKTraveler(String lastName, String firstName) async{
       {"Firstname": {"\$eq": firstName}}
     ]);
 }
-Future<String> verifyDriversLicense(String lastName, DateTime birthDate) async{
+Future<Map<String, String>> verifyDriversLicense(String lastName, DateTime birthDate) async{
   return getQueryQRCode(
     "ipfs://QmbsEWM7nGU9p3vLkB3G8mp99WESVa25nRHS3Exq8WfBh3",
     "PassportUK",  

@@ -85,9 +85,9 @@ class _CreateState extends State<VerifyTraveler> {
                   String message = '';
 
                   try {
-                    String link = await verifyUKTraveler(_lastName, _firstName);
+                    var data = await verifyUKTraveler(_lastName, _firstName);
 
-                    await Navigator.pushNamed(context, '/verify_traveler/qrcode', arguments: link);
+                    await Navigator.pushNamed(context, '/verify_traveler/qrcode2', arguments: data);
 
                     message = 'Query created successfully';
                   } catch (e) {
