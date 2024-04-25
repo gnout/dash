@@ -1,3 +1,4 @@
+import 'package:dash/services/session.dart';
 import 'package:flutter/material.dart';
 
 abstract class ExampleTile extends StatelessWidget {
@@ -40,12 +41,18 @@ class MenuTile extends ExampleTile {
     required super.title,
     required super.subTitle,
     required this.route,
+    this.checkUserId = true,
   });
 
   final String route;
+  final bool checkUserId;
 
   @override
   void onTap(BuildContext context) async {
+    if ((checkUserId) && (Session.userId.isEmpty)) {
+      return;
+    }
+
     await Navigator.pushNamed(context, route);
   }
 }
