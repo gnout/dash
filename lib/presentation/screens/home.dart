@@ -42,6 +42,13 @@ class Home extends StatelessWidget {
               route: '/verify_driver',
               checkUserId: false,
             ),
+            MenuTile(
+              icon: Icons.room_preferences,
+              title: 'Preferences',
+              subTitle: 'Food, allergies etc.',
+              route: '/preferences',
+              checkUserId: false,
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:dash/presentation/screens/preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:dash/presentation/screens/connect_wallet.dart';
 import 'package:dash/presentation/screens/home.dart';
@@ -28,6 +29,8 @@ class DashApp extends StatelessWidget {
         '/verify_traveler/qrcode2': (context) => const QrCode2(),
         '/verify_driver': (context) => const VerifyDriver(),
         '/verify_driver/qrcode2': (context) => const QrCode2(),
+        '/preferences': (context) => const Preferences(),
+        '/preferences/qrcode': (context) => const QrCode(),
       },
     );
   }

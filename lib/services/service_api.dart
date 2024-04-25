@@ -1,4 +1,5 @@
 import 'package:dash/presentation/models/passport.dart';
+import 'package:dash/presentation/models/preferences.dart';
 import 'package:dash/services/session.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
@@ -28,6 +29,44 @@ class APIService {
   set responseBody(String value) {
     _responseBody = value;
   }
+
+
+
+
+
+  Future<String> setPreferencesData({required PreferencesDao preferences}) async {
+    String basicAuth = 'Basic ' + base64Encode(utf8.encode('$username:$password'));
+    var url = Uri.parse('$baseURL/v1/credentials');
+    var headers = <String, String>{
+      'authorization': basicAuth,
+      'Content-Type': 'application/json',
+    };
+    var body = jsonEncode({
+      "credentialSchema": "ipfs://QmRtT24U3VGWTXggpePJubNhzFiZ1shiaf5doNKFTPwhCs",
+      "type": "MyPreferences",
+      "credentialSubject": {
+        "id": Session.userId,
+        "Foods": preferences.food,
+        "Hobbies": preferences.hobbies,
+        "Cities": preferences.cities
+      },
+      "signatureProof": true,
+      "mtProof": false
+    });
+    var response = await http.post(url, headers: headers, body: body);
+    statusCode = response.statusCode;
+
+    if (response.statusCode == 201) {
+      var responseData = jsonDecode(response.body);
+      return await getCredentialDetails(responseData['id']); // Return the Future returned by getCredentialDetails
+    } else {
+      return '';
+    }
+  }
+
+
+
+
 
   Future<String> fetchData({required Passport passport}) async {
 
