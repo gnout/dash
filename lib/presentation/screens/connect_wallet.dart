@@ -59,7 +59,7 @@ class _ConnectWalletState extends State<ConnectWallet> {
             try {
               ConnectionQRCode connection = await service.fetchQRCodeLink();
 
-              await Navigator.pushNamed(context, '/create/qrcode', arguments: connection.qrCodeLink)
+              await Navigator.pushNamed(context, '/connect_wallet/qrcode', arguments: connection.qrCodeLink)
                   .then((value) async => {
                 await _onReturnBack(service, connection.sessionID, context)
               });
