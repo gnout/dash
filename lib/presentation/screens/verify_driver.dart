@@ -73,9 +73,7 @@ class _CreateState extends State<VerifyDriver> {
                   String message = '';
 
                   try {
-                    var data = await verifyDriversLicense(_lastName, _dateOfBrith);
-
-                    //await Navigator.pushNamed(context, '/verify_driver/qrcode', arguments: data['link']);
+                    await verifyDriversLicense(_lastName, _dateOfBrith);
                     await Navigator.pushNamed(context, '/verify_driver/qrcode2');
                   } catch (e) {
                     message = '$e';

@@ -31,7 +31,7 @@ class APIService {
 
   Future<String> fetchData({required Passport passport}) async {
 
-    String dateOfBirth = DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").format(
+    String dateOfBirth = DateFormat("yyyy-MM-dd").format(
         DateTime.parse(passport.dateOfBirth!)
     );
 
