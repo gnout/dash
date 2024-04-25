@@ -54,6 +54,7 @@ class Home extends StatelessWidget {
               title: 'Request Preferences',
               subTitle: 'Request Preferences',
               route: '/requestPreferences',
+              checkUserId: false,
             )
           ],
         ),

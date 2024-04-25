@@ -51,12 +51,38 @@ class _QrCodeState extends State<QrCode3> {
     var response = await http.get(Uri.parse('https://verifier-backend.polygonid.me/status?sessionID=${Session.connection.sessionID}'));
     var data = jsonDecode(response.body);
     print(data);
+    extractPreferences(response.body);
     if (data['status'] == 'success') {
       _timer?.cancel();
       setState(() {
         _status = 'approved';
       });
     }
+  }
+  void extractPreferences(String responseBody) {
+  // Decode the JSON response
+  var decodedResponse = jsonDecode(responseBody);
+
+  // Navigate through the JSON to find the verifiable presentations
+  var presentations = decodedResponse['jwzMetadata']['verifiablePresentations'];
+
+  // Loop through each presentation to find the relevant data
+  for (var presentation in presentations) {
+    var credentialSubject = presentation['credentialSubject'];
+    if (credentialSubject.containsKey('Hobbies')) {
+      setState(() {
+        _hobbies = credentialSubject['Hobbies'];
+      });
+    } else if (credentialSubject.containsKey('Foods')) {
+      setState(() {
+        _foods = credentialSubject['Foods'];
+      });
+    } else if (credentialSubject.containsKey('Cities')) {
+      setState(() {
+        _cities = credentialSubject['Cities'];
+      });
+    }
+  }
   }
 
   @override

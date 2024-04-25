@@ -15,7 +15,7 @@ class _CreateState extends State<RequestPrefs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Verify Traveler'),
+        title: const Text('Request travel preferences'),
       ),
       body: Form(
         key: _formKey,
@@ -58,7 +58,7 @@ class _CreateState extends State<RequestPrefs> {
                     borderRadius: BorderRadius.circular(6.0),
                   ),
                 ),
-                child: const Text('requet Preferences'),
+                child: const Text('request Preferences'),
               ),
             ],
           ),
