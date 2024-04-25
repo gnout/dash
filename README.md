@@ -2,18 +2,18 @@
 
 ##  Project Overview
 
-Purpose: "Decode Travel - PIP Polygon ID Passport" aims to streamline car rental processes using a blockchain-enabled access and loyalty system, leveraging the capabilities of Polygon ID to provide secure digital identity verification.
-Functionality: Key features include digital key distribution for car access, a system for sharing temporary digital keys, and a loyalty points system managed through blockchain technology to enhance customer engagement and security.
+__Purpose__: "Decode Travel - PIP Polygon ID Passport" aims to streamline car rental processes using a blockchain-enabled access and loyalty system, leveraging the capabilities of Polygon ID to provide secure digital identity verification.  
+__Functionality__: Key features include digital key distribution for car access, a system for sharing temporary digital keys, and a loyalty points system managed through blockchain technology to enhance customer engagement and security.
 
 ##   Technical Overview of Codebase
 
-Languages and Frameworks: The project uses Flutter for both front-end and potential cross-platform needs, providing a unified development approach.
-API Integration: This includes connections with various service providers:
-IT Kompass: For ticketing solutions.
-Avra and others: For additional functionalities not specified yet.
-Polygon ID API: For integrating blockchain-based identity verification.
-Dependencies: Outline the major libraries used in the Flutter environment, such as HTTP for network requests and provider for state management.
+__Languages and Frameworks__: The project uses Flutter for both front-end and potential cross-platform needs, providing a unified development approach.  
+__API Integration__: This includes connections with various service providers:  
+* IT-Kompass: For ticketing solutions.
+* Avra and others: For additional functionalities not specified yet.
 
+__Polygon ID API__: For integrating blockchain-based identity verification.
+Dependencies: Outline the major libraries used in the Flutter environment, such as HTTP for network requests and provider for state management.
 
 ## System Links
 
